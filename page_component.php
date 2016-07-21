@@ -2,16 +2,18 @@
 /*
 Plugin Name: Page Component
 Description: Add components for pages
-Version: 0.1
+Version: 0.2
 Author: Dmitry Yakovlev
 Author URI: http://dimayakovlev.ru/
 */
 $thisfile = basename(__FILE__, ".php");
 
+if (!is_frontend()) i18n_merge($thisfile) || i18n_merge($thisfile, 'en_US');
+
 register_plugin(
   $thisfile,
   i18n_r($thisfile.'/TITLE'),
-  '0.1',
+  '0.2',
   i18n_r($thisfile.'/AUTHOR'),
   'http://dimayakovlev.ru',
   i18n_r($thisfile.'/DESCRIPTION'),
@@ -19,11 +21,11 @@ register_plugin(
   ''
 );
 
-add_action('edit-tab', 'pluginPageComponentGUI');
+add_action('edit-tab', 'pluginPageComponentGUI', array($thisfile));
 add_filter('pagesavexml', 'pluginPageComponentSaveData');
 add_filter('draftsavexml', 'pluginPageComponentSaveData');
 
-function pluginPageComponentGUI() {
+function pluginPageComponentGUI($plugin_name) {
     global $id, $data_edit;
     $component = $component_enable = '';
     if ($id) {
@@ -39,10 +41,10 @@ function pluginPageComponentGUI() {
 ?>
 <div id="page_component" class="tab">
   <fieldset>    
-    <legend>Component</legend>
+    <legend><?php i18n($plugin_name.'/TAB_TITLE'); ?></legend>
     <p class="inline clearfix">
       <input type="checkbox" id="post-pageComponentEnable" name="post-pageComponentEnable" <?php echo $component_enable; ?> />
-      <label class="checkbox" for="post-pageComponentEnable">Enable page component</label>
+      <label class="checkbox" for="post-pageComponentEnable"><?php i18n($plugin_name.'/PAGE_COMPONENT_ENABLE'); ?></label>
     </p>
     <div class="codewrap">
       <textarea name="post-pageComponent" <?php echo getCodeEditorAttr(''); ?>><?php echo $component; ?></textarea>
