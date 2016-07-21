@@ -44,7 +44,9 @@ function pluginPageComponentGUI() {
       <input type="checkbox" id="post-pageComponentEnable" name="post-pageComponentEnable" <?php echo $component_enable; ?> />
       <label class="checkbox" for="post-pageComponentEnable">Enable page component</label>
     </p>
-    <textarea name="post-pageComponent" class="text short"><?php echo $component; ?></textarea>
+    <div class="codewrap">
+      <textarea name="post-pageComponent" <?php echo getCodeEditorAttr(''); ?>><?php echo $component; ?></textarea>
+    </div>
   </fieldset>
 </div>
 <?php }
