@@ -50,6 +50,11 @@ function pluginPageComponentGUI($plugin_name) {
       <textarea name="post-pageComponent" <?php echo getCodeEditorAttr(''); ?>><?php echo $component; ?></textarea>
     </div>
   </fieldset>
+  <script type="text/javascript">
+    $('#editform').on('submit',function(e){
+      save_codeeditors();
+    }); 
+  </script>
 </div>
 <?php }
 
@@ -70,6 +75,13 @@ function page_component_enabled() {
   return (bool) (string) $data_index->pageComponentEnable == '1';
 }
 
+/**
+ * Get page component
+ * This will output page component
+ *
+ * @param bool $force Force return of disabled components if true
+ * @param bool $raw Do not process php if true
+ */
 function get_page_component($force = false, $raw = false) {
   global $data_index;
   $component = (string)$data_index->pageComponent;
