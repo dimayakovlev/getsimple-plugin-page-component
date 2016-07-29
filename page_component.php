@@ -21,9 +21,11 @@ register_plugin(
   ''
 );
 
-add_action('edit-tab', 'pluginPageComponentGUI', array($thisfile));
-add_filter('pagesavexml', 'pluginPageComponentSaveData');
-add_filter('draftsavexml', 'pluginPageComponentSaveData');
+if (!is_frontend()) {
+  add_action('edit-tab', 'pluginPageComponentGUI', array($thisfile));
+  add_filter('pagesavexml', 'pluginPageComponentSaveData');
+  add_filter('draftsavexml', 'pluginPageComponentSaveData');
+}
 
 function pluginPageComponentGUI($plugin_name) {
     global $id, $data_edit;
