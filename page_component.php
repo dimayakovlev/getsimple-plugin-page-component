@@ -52,11 +52,6 @@ function pluginPageComponentGUI($plugin_name) {
       <textarea name="post-pageComponent" <?php echo getCodeEditorAttr(''); ?>><?php echo $component; ?></textarea>
     </div>
   </fieldset>
-  <script type="text/javascript">
-    $('#editform').on('submit',function(e){
-      save_codeeditors();
-    }); 
-  </script>
 </div>
 <?php }
 
